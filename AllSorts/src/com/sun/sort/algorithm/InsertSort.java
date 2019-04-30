@@ -1,6 +1,8 @@
 package com.sun.sort.algorithm;
 
-public class InsertAlgorithm implements SortAlgorithm{
+import java.util.Arrays;
+
+public class InsertSort implements SortAlgorithm{
     /**
      * 这个算法就是，拿第一层循环的那个值，也就是要排序的那个值，
      * 与前面的数对比（假设前面的数都是已经排好序的）。如果这个值小，
