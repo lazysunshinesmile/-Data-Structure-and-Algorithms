@@ -5,9 +5,8 @@ import java.util.List;
 
 public class Combine {
 
-    public List<List<Integer>> combine(int n, int k) {
-        List<List<Integer>> ret = new ArrayList<>();
-
-
-    }
+//    public List<List<Integer>> combine(int n, int k) {
+//
+//
+//    }
 }
