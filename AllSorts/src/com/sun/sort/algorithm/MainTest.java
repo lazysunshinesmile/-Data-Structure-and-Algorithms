@@ -13,10 +13,11 @@ public class MainTest {
 //        分冶排序
 
 
-        SortAlgorithm sortAlgorithm = new MergeSort();
-        array = sortAlgorithm.sort(array);
-
-        System.out.println(Arrays.toString(array));
+//        SortAlgorithm sortAlgorithm = new MergeSort();
+//        array = sortAlgorithm.sort(array);
+//
+//        System.out.println(Arrays.toString(array));
+        System.out.println(Math.round(23.7));
 
 //        BinaryHeap<Integer> binaryHeap = new BinaryHeap<>();
 //        for(int i = 0; i< array.length; i++) {

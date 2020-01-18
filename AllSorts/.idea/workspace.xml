@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="084982e2-917c-4bda-8655-02316ebd6513" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change afterPath="$PROJECT_DIR$/src/com/sun/sort/algorithm/HeapSort.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/com/sun/sort/algorithm/Interleave.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/com/sun/sort/algorithm/JumpGame.java" afterDir="false" />
@@ -10,6 +11,18 @@
       <change afterPath="$PROJECT_DIR$/../Test/src/com/grandstream/test/GetBucketTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/sun/sort/algorithm/Combine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sun/sort/algorithm/Combine.java" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/sun/sort/algorithm/Game24.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/sun/sort/algorithm/JumpGameII.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/sun/sort/algorithm/Permu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/sun/sort/algorithm/SmallestRepunDevideByK.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/sun/sort/algorithm/TestMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AllSorts/META-INF/AllSorts.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AllSorts/com/sun/sort/algorithm/MainTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AllSorts/com/sun/sort/algorithm/MainTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/sun/sort/algorithm/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sun/sort/algorithm/MainTest.java" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,19 +37,54 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+<<<<<<< Updated upstream
         <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/FirstBadVersion.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="380">
               <caret line="19" column="30" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="30" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/JumpGameII.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="440">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< Updated upstream
         <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/Combine.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
               <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+=======
+        <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/SmallestRepunDevideByK.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+>>>>>>> Stashed changes
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+<<<<<<< Updated upstream
+        <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/Interleave.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="580">
+              <caret line="29" column="21" lean-forward="true" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+              <folding>
+                <element signature="method#isInterleave2#0;class#Interleave#0" />
+              </folding>
+=======
+        <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/TestMain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="40">
+              <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -45,35 +93,53 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/Interleave.java">
+        <entry file="jar://D:/software/java8/src.zip!/java/lang/Thread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="580">
-              <caret line="29" column="21" lean-forward="true" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
-              <folding>
-                <element signature="method#isInterleave2#0;class#Interleave#0" />
-              </folding>
+            <state relative-caret-position="15422">
+              <caret line="756" selection-start-line="756" selection-end-line="756" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/QuickSort.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="160">
               <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/MainTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-66">
+              <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< Updated upstream
         <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/InsertSort.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="560">
               <caret line="28" selection-start-line="28" selection-end-line="28" />
+=======
+        <entry file="jar://D:/software/java8/src.zip!/java/lang/Math.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5434">
+              <caret line="291" column="25" selection-start-line="291" selection-start-column="25" selection-end-line="291" selection-end-column="25" />
+              <folding>
+                <element signature="e#11119#11120#0" expanded="true" />
+                <element signature="e#11200#11201#0" expanded="true" />
+              </folding>
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/HeapSort.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -82,6 +148,36 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/LengthOfLastWord.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="550">
+              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+>>>>>>> Stashed changes
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/Multiply.java">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
+            <state relative-caret-position="660">
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
+=======
+            <state relative-caret-position="352">
+              <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+>>>>>>> Stashed changes
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/AtMostNGivenDigitSet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
             </state>
           </provider>
         </entry>
@@ -89,29 +185,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/LengthOfLongestSubstring.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
+            <state relative-caret-position="726">
               <caret line="33" selection-start-line="33" selection-end-line="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/sun/instrument/TransformerManager.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1940">
-              <caret line="107" selection-start-line="107" selection-end-line="107" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/String.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3440">
-              <caret line="202" selection-start-line="202" selection-end-line="202" />
-              <folding>
-                <element signature="e#6104#6105#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -129,6 +204,9 @@
     <findStrings>
       <find>longestPalindrome</find>
     </findStrings>
+    <dirStrings>
+      <dir>F:\workspace\java\-Data-Structure-and-Algorithms\AllSorts\src\com\sun\sort\algorithm</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -141,7 +219,6 @@
         <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/InsertSort.java" />
         <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/ShellSort.java" />
         <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/BinaryHeap.java" />
-        <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/MainTest.java" />
         <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/MergeSort.java" />
         <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/SingleNumber.java" />
         <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/IntealeavtingString.java" />
@@ -162,20 +239,29 @@
         <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/LengthOfLastWord.java" />
         <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/Multiply.java" />
         <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/AtMostNGivenDigitSet.java" />
+<<<<<<< Updated upstream
         <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/FirstBadVersion.java" />
         <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/Combine.java" />
         <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/JumpGame.java" />
         <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/Interleave.java" />
         <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/QuickSort.java" />
         <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/HeapSort.java" />
+=======
+        <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/Permu.java" />
+        <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/MainTest.java" />
+        <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/Game24.java" />
+        <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/JumpGameII.java" />
+        <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/SmallestRepunDevideByK.java" />
+        <option value="$PROJECT_DIR$/src/com/sun/sort/algorithm/TestMain.java" />
+>>>>>>> Stashed changes
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="970" />
-    <option name="y" value="22" />
-    <option name="width" value="1398" />
-    <option name="height" value="1020" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="754" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -190,17 +276,6 @@
               <item name="AllSorts" type="b2602c69:ProjectViewProjectNode" />
               <item name="AllSorts" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="AllSorts" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AllSorts" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AllSorts" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AllSorts" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="algorithm" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -211,6 +286,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -224,9 +301,15 @@
       </list>
     </option>
   </component>
+<<<<<<< Updated upstream
   <component name="RunManager" selected="Application.HeapSort">
     <configuration name="FirstBadVersion" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.sun.sort.algorithm.FirstBadVersion" />
+=======
+  <component name="RunManager" selected="Application.TestMain">
+    <configuration name="Game24" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.sun.sort.algorithm.Game24" />
+>>>>>>> Stashed changes
       <module name="AllSorts" />
       <extension name="coverage">
         <pattern>
@@ -238,8 +321,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< Updated upstream
     <configuration name="HeapSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.sun.sort.algorithm.HeapSort" />
+=======
+    <configuration name="JumpGameII" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.sun.sort.algorithm.JumpGameII" />
+>>>>>>> Stashed changes
       <module name="AllSorts" />
       <extension name="coverage">
         <pattern>
@@ -251,8 +339,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< Updated upstream
     <configuration name="Interleave" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.sun.sort.algorithm.Interleave" />
+=======
+    <configuration name="MainTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.sun.sort.algorithm.MainTest" />
+>>>>>>> Stashed changes
       <module name="AllSorts" />
       <extension name="coverage">
         <pattern>
@@ -264,8 +357,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< Updated upstream
     <configuration name="JumpGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.sun.sort.algorithm.JumpGame" />
+=======
+    <configuration name="SmallestRepunDevideByK" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.sun.sort.algorithm.SmallestRepunDevideByK" />
+>>>>>>> Stashed changes
       <module name="AllSorts" />
       <extension name="coverage">
         <pattern>
@@ -277,8 +375,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< Updated upstream
     <configuration name="QuickSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.sun.sort.algorithm.QuickSort" />
+=======
+    <configuration name="TestMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.sun.sort.algorithm.TestMain" />
+>>>>>>> Stashed changes
       <module name="AllSorts" />
       <extension name="coverage">
         <pattern>
@@ -292,11 +395,19 @@
     </configuration>
     <recent_temporary>
       <list>
+<<<<<<< Updated upstream
         <item itemvalue="Application.HeapSort" />
         <item itemvalue="Application.QuickSort" />
         <item itemvalue="Application.Interleave" />
         <item itemvalue="Application.JumpGame" />
         <item itemvalue="Application.FirstBadVersion" />
+=======
+        <item itemvalue="Application.TestMain" />
+        <item itemvalue="Application.SmallestRepunDevideByK" />
+        <item itemvalue="Application.JumpGameII" />
+        <item itemvalue="Application.Game24" />
+        <item itemvalue="Application.MainTest" />
+>>>>>>> Stashed changes
       </list>
     </recent_temporary>
   </component>
@@ -310,14 +421,30 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1555661767773</updated>
+      <workItem from="1556946883981" duration="5210000" />
+      <workItem from="1556978792813" duration="3912000" />
+      <workItem from="1557066699583" duration="4293000" />
+      <workItem from="1557149638088" duration="5498000" />
+      <workItem from="1557928783143" duration="1805000" />
+      <workItem from="1568519036687" duration="1306000" />
+      <workItem from="1579331822915" duration="240000" />
     </task>
     <servers />
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="22264000" />
+  </component>
   <component name="ToolWindowManager">
+<<<<<<< Updated upstream
     <frame x="63" y="-4" width="1857" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22553897" />
+=======
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23146747" />
+>>>>>>> Stashed changes
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -326,15 +453,21 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
+<<<<<<< Updated upstream
       <window_info anchor="bottom" id="Run" order="2" weight="0.627551" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4632653" />
+=======
+      <window_info anchor="bottom" id="Run" order="2" weight="0.51510066" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.47651008" />
+>>>>>>> Stashed changes
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32959184" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32885906" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32959184" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32885906" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -511,12 +644,18 @@
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+<<<<<<< Updated upstream
           <url>file://$PROJECT_DIR$/src/com/sun/sort/algorithm/FirstBadVersion.java</url>
           <line>15</line>
+=======
+          <url>file://$PROJECT_DIR$/src/com/sun/sort/algorithm/JumpGameII.java</url>
+          <line>9</line>
+>>>>>>> Stashed changes
           <properties />
           <option name="timeStamp" value="72" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+<<<<<<< Updated upstream
           <url>file://$PROJECT_DIR$/src/com/sun/sort/algorithm/Interleave.java</url>
           <line>44</line>
           <properties />
@@ -545,37 +684,30 @@
           <line>27</line>
           <properties />
           <option name="timeStamp" value="80" />
+=======
+          <url>file://$PROJECT_DIR$/src/com/sun/sort/algorithm/SmallestRepunDevideByK.java</url>
+          <line>20</line>
+          <properties />
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/sun/sort/algorithm/SmallestRepunDevideByK.java</url>
+          <line>40</line>
+          <properties />
+          <option name="timeStamp" value="74" />
+>>>>>>> Stashed changes
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm.java" />
-    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/Object.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/Comparable.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/Object.class" />
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/Comparable.class" />
     <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/SortAlgorithm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/MainTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -590,10 +722,18 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/Integer.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4660">
           <caret line="244" selection-start-line="244" selection-end-line="244" />
+=======
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/Integer.class" />
+    <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/InsertSort.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>
@@ -635,13 +775,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/Arrays.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="1211" column="23" selection-start-line="1211" selection-start-column="23" selection-end-line="1211" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/Arrays.class" />
     <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/UpdateMatrix.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="419">
@@ -665,27 +799,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/List.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1280">
-          <caret line="67" column="6" selection-start-line="67" selection-start-column="6" selection-end-line="67" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/ArrayList.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5740">
-          <caret line="309" selection-start-line="309" selection-end-line="309" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/sun/instrument/InstrumentationImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4860">
-          <caret line="266" selection-start-line="266" selection-end-line="266" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/List.class" />
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/ArrayList.class" />
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/sun/instrument/InstrumentationImpl.class" />
     <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/LongestPalindrome.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3260">
@@ -748,20 +864,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/Vector.class">
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/Vector.class" />
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/Stack.class" />
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/sun/instrument/TransformerManager.class" />
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/String.class" />
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/math/BigInteger.class" />
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/Math.class" />
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/StrictMath.class" />
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/Thread.class" />
+    <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/PartitionLabels.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5380">
-          <caret line="299" column="33" selection-start-line="299" selection-start-column="33" selection-end-line="299" selection-end-column="33" />
+        <state relative-caret-position="616">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/Stack.class">
+    <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/Permu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
+        <state relative-caret-position="220">
+          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/math/BigInteger.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -865,11 +996,74 @@
           <folding>
             <element signature="method#isInterleave2#0;class#Interleave#0" />
           </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/Game24.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1166">
+          <caret line="56" column="39" selection-start-line="56" selection-start-column="39" selection-end-line="56" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/Thread.class">
+    <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/JumpGameII.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/SmallestRepunDevideByK.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/software/java8/src.zip!/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15422">
+          <caret line="756" selection-start-line="756" selection-end-line="756" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/software/java8/src.zip!/java/lang/Math.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5434">
+          <caret line="291" column="25" selection-start-line="291" selection-start-column="25" selection-end-line="291" selection-end-column="25" />
+          <folding>
+            <element signature="e#11119#11120#0" expanded="true" />
+            <element signature="e#11200#11201#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/LengthOfLastWord.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/Multiply.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/AtMostNGivenDigitSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+>>>>>>> Stashed changes
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/LengthOfLongestSubstring.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="308">
           <caret line="237" column="28" selection-start-line="237" selection-start-column="28" selection-end-line="237" selection-end-column="28" />
         </state>
@@ -903,6 +1097,27 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+=======
+        <state relative-caret-position="726">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/TestMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sun/sort/algorithm/MainTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-66">
+          <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>
