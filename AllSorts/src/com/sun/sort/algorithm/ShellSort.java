@@ -1,6 +1,8 @@
 package com.sun.sort.algorithm;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Hashtable;
 
 public class ShellSort implements SortAlgorithm {
 
@@ -17,7 +19,8 @@ public class ShellSort implements SortAlgorithm {
 //            13 27 94 33 39
 //            25 59 94 65 82
 //            45
-//    将上述四行数字，依序接在一起时我们得到：[ 10 14 73 25 23 13 27 94 33 39 25 59 94 65 82 45 ].这时10已经移至正确位置了，然后再以3为步长进行排序：
+//    将上述四行数字，依序接在一起时我们得到：[ 10 14 73 25 23 13 27 94 33 39 25 59 94 65 82 45 ].
+//    这时10已经移至正确位置了，然后再以3为步长进行排序：
 //
 //            10 14 73
 //            25 23 13
@@ -34,25 +37,50 @@ public class ShellSort implements SortAlgorithm {
 //            45 94 82
 //            94
 //    最后以1步长进行排序（此时就是简单的插入排序了）。
+
+    public static void main(String[] args) {
+//        ShellSort shellSort = new ShellSort();
+//        System.out.println(Arrays.toString(shellSort.sort(new int[]{13,14,94,33,82,25,59,94,65,23,45,27,73,25,100,10,})));
+
+//        Hashtable<String, String> phone = new Hashtable<>();
+//        String key = "2";
+//        phone.put("1","");
+//        phone.put("2", "strr");
+//        phone.put("3", "sfds");
+//        System.out.println(phone);
+//        System.out.println(phone.get(key));
+        ArrayList<Integer> a1 = new ArrayList<>();
+        a1.add(12);
+        a1.add(14);
+        ArrayList<Integer> a2 = new ArrayList<>(a1);
+        a1.add(15);
+
+        if(a1.equals(a2)) {
+            System.out.println("xaing");
+        }else {
+            System.out.println("no");
+        }
+
+    }
     @Override
     public int[] sort(int[] array) {
-        for(int step = (array.length -1)/2; step>=1;step/=2 ){
-            //下面是插入排序
-            for(int i = step; i < array.length; i+=step) {
+        for(int step=(array.length-1)/2; step >=1;step/=2) {
+            //step 步长
+            //下面插入排序,参考insertSort
+            for(int i=step;i<array.length;i+=step) {
                 int toSort = array[i];
-                int j = i - step;
-                for(; j >=0;j-=step){
-
-                    if(toSort < array[j]) {
-                        array[j+step] = array[j];
+                //从当列的前一个数开始与toSort比较，比toSort大就往后挪一位，小就退出循环，并把toSort放在这个数的后面
+                int k = i-step;
+                for(;k>=0;k-=step) {
+                    if(array[k] >toSort) {
+                        array[k+step] = array[k];
                     }else {
                         break;
                     }
                 }
-                array[j + step] = toSort;
+                //toSort比array[k]大，所以放在array[k+step]中
+                array[k+step] = toSort;
             }
-            System.out.println(Arrays.toString(array));
-
         }
         return array;
     }

@@ -28,6 +28,20 @@ public class MainTest {
 //        binaryHeap.deleteMin();
 //        System.out.println(binaryHeap);
 
+
+        while(true) {
+            Thread tre = new Thread(new MyRunnable());
+            tre.start();
+        }
+
+    }
+
+    static class MyRunnable implements Runnable {
+
+        @Override
+        public void run() {
+            SingleTon.getInstance();
+        }
     }
 
 }
