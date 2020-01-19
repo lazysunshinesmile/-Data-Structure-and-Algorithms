@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/-Data-Structure-and-Algorithms.iml" filepath="$PROJECT_DIR$/.idea/-Data-Structure-and-Algorithms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AVLNodeLeftAndRightRoate/AVLNodeLeftAndRightRoate.iml" filepath="$PROJECT_DIR$/AVLNodeLeftAndRightRoate/AVLNodeLeftAndRightRoate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AllSorts/AllSorts.iml" filepath="$PROJECT_DIR$/AllSorts/AllSorts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BinaryHeap/BinaryHeap.iml" filepath="$PROJECT_DIR$/BinaryHeap/BinaryHeap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GetCloseWords/GetCloseWords.iml" filepath="$PROJECT_DIR$/GetCloseWords/GetCloseWords.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Test/src/com/grandstream/grandstream.iml" filepath="$PROJECT_DIR$/Test/src/com/grandstream/grandstream.iml" />
     </modules>
   </component>
 </project>
