@@ -40,7 +40,7 @@ public class LevelOrder {
         }
         rootRet.add(root.val);
         ret.add(rootRet);
-        ret = getNodeVal(ret, root, 1);
+//        ret = getNodeVal(ret, root, 1);
 
 
 
@@ -55,7 +55,7 @@ public class LevelOrder {
      * @param depth 统计的节点的深度
      * @return
      */
-    public List<List<Integer>> getNodeVal(List<List<Integer>> ret, TreeNode root, int depth) {
+    /*public List<List<Integer>> getNodeVal(List<List<Integer>> ret, TreeNode root, int depth) {
         if(root == null) {
             return ret;
         }
@@ -82,7 +82,7 @@ public class LevelOrder {
         getNodeVal(ret, root.left, ++depth);
         getNodeVal(ret, root.right, depth);
         return ret;
-    }
+    }*/
 
 
 }

@@ -1,12 +1,566 @@
 package com.mircrosoft.hard.study;
 
 import com.mircrosoft.hard.study.bean.ListNode;
+import com.mircrosoft.hard.study.bean.Node;
+import javafx.util.Pair;
 
+import java.security.KeyPair;
 import java.util.*;
 
 public class Solution {
 
+    public int findLatestStep(int[] arr, int m) {
+        //各个长度的1的个数
+        int[] count = new int[arr.length+1];
+        //end[2] = 3, 从位置2 到3 都是1，同时end[3] == 2。+2 是把第一个和最后一个都为0
+        int ret = -1;
+        int[] end = new int[arr.length + 2];
+        int[] num = new int[arr.length + 2];
+        for(int i=0; i<arr.length; i++) {
+            int index = arr[i];
+            num[index] = 1;
+            //加了一个1之后总共三种情况
+            if(num[arr[i] -1] == 0 && num[arr[i] + 1] == 0){
+                //左右都为0
+                count[1] ++;
+                end[index] = index;
+            } else if(num[arr[i] -1] == 0 && num[arr[i] + 1] == 1) {
+                //左0右1
+                end[index] = end[index+1];
+                count[end[index+1] - index] --;
+                count[end[index] - index +1]++;
+                end[end[index]] = index;
+            } else if( num[arr[i] -1] == 1 && num[arr[i] + 1] == 0) {
+                //左1 右0
+                end[index] = end[index-1];
+                count[index-end[index-1]]--;
+                count[index-end[index-1] + 1]++;
+                end[end[index]] = index;
+            } else if( num[arr[i] -1] == 1 && num[arr[i] + 1] == 1){
+                //左右都为1
+                count[index-end[index-1]]--;
+                count[end[index+1] - index]--;
+                count[end[index+1]- end[index-1] + 1] ++;
+                int temp = end[index -1];
+                end[end[index-1]] = end[index+1];
+                end[end[index+1]] = temp;
+            }
+            if(count[m] > 0) {
+                ret = i+1;
+            }
+        }
+        return ret;
+    }
+
+    public int singleNumber(int[] nums) {
+        int ret = 0;
+        int sum2 = 0;
+        for(int i=0; i<nums.length; i++) {
+            int temp = ret ^ nums[i];
+            if(ret != 0 && (temp & ret)== 0) {
+                //有重复的
+                int temp2 = sum2 ^ nums[i];
+                if(sum2 != 0 && (temp2 &sum2)==0) {
+                    //第三次出现
+                    ret = temp;
+                } else {
+                    //第二次出现。
+                    sum2 = temp2;
+                }
+            } else {
+                //第一次出现
+                ret = temp;
+            }
+
+        }
+        return ret;
+    }
+
+    public Node cloneGraph(Node node) {
+        if(node == null) {
+            return null;
+        }
+        Map<Node, Node>  visited = new HashMap<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(node);
+
+
+        while(!queue.isEmpty()) {
+            Node cur = queue.remove();
+            Node clone = null;
+            if(!visited.containsKey(cur)) {
+                clone = new Node(cur.val);
+                visited.put(cur, clone);
+            } else {
+                clone = visited.get(cur);
+            }
+            if(clone.neighbors.size() != 0) {
+                continue;
+            }
+
+            for(Node next: cur.neighbors) {
+                Node nextClone = visited.getOrDefault(next, new Node(next.val));
+                visited.put(next, nextClone);
+                clone.neighbors.add(nextClone);
+                queue.add(next);
+            }
+        }
+        return visited.get(node);
+
+    }
+
+    public void solve(char[][] board) {
+        if(board == null || board.length == 0 || board[0] == null) {
+            return;
+        }
+        int m = board.length; //行
+        int n = board[0].length; //lie
+        int[][] position = new int[m*n][2];
+        int k =0;
+
+        for(int j=0; j<n; j++) {
+            if(board[0][j] == 'O'){
+                position[k][0] = 0;
+                position[k++][1] = j;
+            }
+        }
+        for(int j=0; j<n && k < m*n; j++) {
+            if(board[m-1][j] == 'O'){
+                position[k][0] = m-1;
+                position[k++][1] = j;
+            }
+        }
+
+        for(int j=0; j<m&& k < m*n; j++) {
+            if(board[j][0] == 'O'){
+                position[k][0] = j;
+                position[k++][1] = 0;
+            }
+        }
+
+        for(int j=0; j<m&& k < m*n; j++) {
+            if(board[j][n-1] == 'O'){
+                position[k][0] = j;
+                position[k++][1] = n-1;
+            }
+        }
+        k--;
+        while(k >=0) {
+            internal(board, position[k][0], position[k][1], 0, m, n);
+            k--;
+        }
+
+        for(int i=0; i<m; i++) {
+            for(int j=0; j<n; j++) {
+                if(board[i][j] == '#') {
+                    board[i][j] = 'O';
+                } else{
+                    board[i][j] = 'X';
+                }
+            }
+        }
+    }
+
+    //dic 表示从哪个方向传过来的，
+    //0 刚进来
+    //1 从上
+    //2 从下
+    //3 从左
+    //4 从右
+    private void internal(char[][] board, int i, int j, int dic, int m , int n) {
+        if(i== m-1 || j == n-1 || i==0 || j==0) {
+            board[i][j] = '#';
+            if(dic != 0) {
+                return;
+            }
+        }
+        //检测上面的
+        if(dic != 1 && i-1 >=0 && board[i-1][j] == 'O' ) {
+            board[i-1][j] = '#';
+            internal(board, i-1, j, 2, m, n);
+        }
+
+        //检测下面的
+        if(dic != 2 && i+1 < m && board[i+1][j] == 'O') {
+            board[i+1][j] = '#';
+            internal(board, i+1, j, 1, m, n);
+        }
+
+        //检测左边的
+        if(dic != 3 && j -1 >=0 && board[i][j-1] == 'O') {
+            board[i][j-1] = '#';
+            internal(board, i, j-1, 4, m, n);
+        }
+
+        //检测右边的
+        if(dic != 4 && j +1 <n && board[i][j+1] == 'O') {
+            board[i][j+1] = '#';
+            internal(board, i, j+1, 3, m, n);
+        }
+
+
+
+
+
+
+
+
+    }
+
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        if(beginWord.length() != endWord.length() || !wordList.contains(endWord)) {
+            return 0;
+        }
+        Map<String, List<String>> dictionary = new HashMap<>();
+        initMap(dictionary, wordList);
+        Map<String, Integer> used = new HashMap<>();
+        Map<String, Integer> endUsed = new HashMap<>();
+
+        Queue<Pair<String, Integer>> queue = new LinkedList<>();
+        Queue<Pair<String, Integer>> endQueue = new LinkedList<>();
+        queue.add(new Pair(beginWord, 1));
+        endQueue.add(new Pair(endWord, 1));
+
+        used.put(beginWord, 1);
+        endUsed.put(endWord, 1);
+        while(!queue.isEmpty() && !endQueue.isEmpty()) {
+            int ret = moveOne(queue, used, endUsed, dictionary);
+            if(ret != -1) {
+                return ret;
+            }
+            ret = moveOne(endQueue, endUsed, used, dictionary);
+            if(ret != -1) {
+                return ret;
+            }
+
+        }
+        return 0;
+
+
+    }
+
+    private int moveOne(Queue<Pair<String, Integer>> queue, Map<String, Integer> used, Map<String, Integer> otherUsed, Map<String, List<String>> dictionary) {
+        Pair<String, Integer> cur = queue.remove();
+        String key = cur.getKey();
+
+        int level = cur.getValue();
+
+        used.put(key, level);
+        for(int i=0; i<key.length(); i++) {
+            String s = key.substring(0,i) + "*" + key.substring(i+1, key.length());
+            List<String> nextList = dictionary.getOrDefault(s, new LinkedList<String>());
+
+            for(String next:nextList) {
+                if(otherUsed.containsKey(next)) {
+                    return otherUsed.get(next) + level;
+                }
+                if(!used.containsKey(next)) {
+                    queue.add(new Pair(next, level +1));
+                }
+            }
+        }
+        return -1;
+    }
+
+
+    private void initMap(Map<String, List<String>> map, List<String> wordList) {
+        Map<String, List<String>> beginMap = new HashMap<>();
+        for(String word: wordList) {
+            int length = word.length();
+            for(int i=0; i<length; i++) {
+                String newString = word.substring(0, i) + "*" + word.substring(i+1, length);
+                List l = map.getOrDefault(newString, new LinkedList<>());
+                l.add(word);
+                map.put(newString, l);
+            }
+        }
+    }
+
+    private int minimumTotalRet = Integer.MAX_VALUE;
+    public int minimumTotal(List<List<Integer>> triangle) {
+        if(triangle == null || triangle.get(0) == null) {
+            return 0;
+        }
+        int currSum = triangle.get(0).get(0);
+
+        internal(triangle, currSum, 1, 0);
+        return minimumTotalRet;
+    }
+
+    private void internal(List<List<Integer>> triangle, int currSum, int l1, int pos) {
+        if(l1 >= triangle.size()) {
+            return;
+        }
+        List<Integer> layer = triangle.get(l1);
+        int posV = (int)layer.get(pos);
+        int posV1 = (int) layer.get(pos+1);
+        if(l1 == triangle.size()-1) {
+            minimumTotalRet = Math.min(currSum + Math.min(posV, posV1), minimumTotalRet);
+            return;
+        }
+        internal(triangle, currSum + posV, l1+1, pos);
+        internal(triangle, currSum + posV1, l1+1, pos+1);
+
+    }
+
+
+    public List<String> restoreIpAddresses(String s) {
+        List<String> ret = new LinkedList<>();
+        if(s == null || s.length() < 4) {
+            return ret;
+        }
+        char[] cs = s.toCharArray();
+        int temp = 0;
+        internal(cs, 0, ret, new LinkedList<>());
+        return ret;
+
+
+    }
+
+    private void internal(char[] cs, int currIndex, List<String> ret, List<Integer> one) {
+        int need = 4-one.size();
+        if(cs.length -currIndex < need || cs.length -currIndex > 3*need ) {
+            return;
+        }
+        if(currIndex == cs.length && one.size() ==4) {
+            StringBuilder s = new StringBuilder();
+            for(int i=0; i<4; i++) {
+                s.append(String.valueOf(one.get(i)));
+                if(i!=3) {
+                    s.append(".");
+                }
+            }
+            ret.add(s.toString());
+            return;
+        }
+        int val = 0;
+        for(int i=currIndex; i<currIndex + 3 && i < cs.length; i++) {
+            int curr = cs[i] -'0';
+            val = val*10 + curr;
+            if(val > 255) {
+                return;
+            }
+            one.add(val);
+            internal(cs, i+1, ret, one);
+            one.remove(one.size()-1);
+            System.out.println(Arrays.toString(one.toArray()));
+        }
+
+    }
+
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        ListNode dummy = new ListNode(-1);
+        if(head == null || head.next == null) {
+            return head;
+        }
+        dummy.next = head;
+        ListNode pre = dummy;
+        ListNode first = head;
+        int k=1;
+        while(head!= null) {
+            if( k>m && k <=n) {
+                first.next = head.next;
+                head.next = pre.next;
+                pre.next = head;
+                head = first.next;
+            } else if(k < m-1) {
+                head = head.next;
+            } else if(k == m) {
+                first = head;
+                head = head.next;
+            } else if(k == m-1)  {
+                pre = head;
+                head = head.next;
+            } else {
+                return dummy.next;
+            }
+            k++;
+
+        }
+
+        return dummy.next;
+    }
+
+    public int numDecodings(String s) {
+        char[] cs = s.toCharArray();
+        int last2 = 1;
+        int last1 = 1;
+        if(cs[0] == '0') {
+            return 0;
+        }
+        for(int i=1; i<cs.length; i++) {
+            int last = cs[i-1] - '0';
+            int curr = cs[i] - '0';
+            if(curr == 0) {
+                if(last == 0 || last >2) {
+                    return 0;
+                }
+            }
+            if(last > 2 ||(last ==2 && curr>6) || last == 0) {
+                last2 = last1;
+            } else if(curr != 0){
+                int temp = last1;
+                last1 = last1 + last2;
+                last2 = temp;
+            } else {
+                int temp = last1;
+                last1 = last2;
+                last2 = temp;
+            }
+        }
+
+        return last1;
+    }
+
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> ret = new LinkedList<>();
+        ret.add(new LinkedList<>());
+        if(nums == null || nums.length == 0) {
+            return ret;
+        }
+
+
+        internal(nums, 0, ret, new LinkedList<Integer>(), new boolean[nums.length]);
+        return ret;
+
+
+    }
+
+    private void internal(int[] nums, int curr, List<List<Integer>> ret, List<Integer> ans, boolean[] used) {
+        // if(curr == nums.length) {
+        //     ret.add(new LinkedList(ans));
+        // }
+
+        for(int i=curr; i<nums.length; i++) {
+            if(i>0 &&nums[i] == nums[i-1] && !used[i-1]) {
+                continue;
+            }
+            ans.add(nums[i]);
+            ret.add(new LinkedList(ans));
+            used[i] = true;
+            internal(nums, i+1, ret, ans, used);
+            used[i] = false;
+            ans.remove(ans.size()-1);
+        }
+    }
+
+    public ListNode partition(ListNode head, int x) {
+        if(head == null || head.next == null) {
+            return head;
+        }
+        ListNode dummy = new ListNode(-1);
+        ListNode smallCurr = dummy;
+        ListNode dummybig = new ListNode(-1);
+        ListNode bigCurr = dummybig;
+        while(head != null) {
+            if(head.val >= x) {
+                bigCurr.next = new ListNode(head.val);
+            } else {
+                smallCurr.next = new ListNode(head.val);
+            }
+            head = head.next;
+        }
+
+        smallCurr.next = dummybig.next;
+        return dummy.next;
+    }
+
+
+    /**
+     *
+     * @param head
+     * @return
+     *
+     *
+     * 注意：ListNode 比较相等最好用当前的和后面的比较，这样逻辑比较简单
+     */
+    public ListNode deleteDuplicates(ListNode head) {
+        if( head == null) {
+            return head;
+        }
+        ListNode dummy = new ListNode(head.val -1);
+        dummy.next = head;
+        ListNode pre = dummy;
+        boolean deleted = false;
+        while(head.next != null) {
+            if(head.val == head.next.val) {
+                pre.next = head.next;
+                deleted = true;
+            } else {
+                if(deleted) {
+                    pre.next = head.next;
+                    deleted = false;
+                } else {
+                    pre = head;
+                }
+            }
+
+
+            head = head.next;
+        }
+        if(deleted) {
+            pre.next = null;
+        }
+
+        return dummy.next;
+    }
+
     List<List<Integer>> combineRet = new LinkedList<>();
+
+    /**
+     * 80.
+     *
+     * 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素最多出现两次，返回移除后数组的新长度。
+     *
+     * 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。
+     *
+     * 示例 1:
+     *
+     * 给定 nums = [1,1,1,2,2,3],
+     *
+     * 函数应返回新长度 length = 5, 并且原数组的前五个元素被修改为 1, 1, 2, 2, 3 。
+     *
+     * 你不需要考虑数组中超出新长度后面的元素。
+     * 示例 2:
+     *
+     * 给定 nums = [0,0,1,1,1,1,2,3,3],
+     *
+     * 函数应返回新长度 length = 7, 并且原数组的前五个元素被修改为 0, 0, 1, 1, 2, 3, 3 。
+     *
+     * 你不需要考虑数组中超出新长度后面的元素。
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     * @param nums
+     * @return
+     *
+     * 解法：双指针，一个指向当前需要替换的位置j，一个指向当前迭代到的位置i。 i>=j是一定的。
+     * 需要注意的是，是把满足条件的往前移动。并不是把不满足条件的替换到后面。
+     */
+    public int removeDuplicates(int[] nums) {
+        if(nums == null || nums.length == 0) {
+            return 0;
+        }
+        int len = nums.length;
+        int count = 1;
+        int j=1;
+        for(int i=1; i<len; i++) {
+            if(nums[i] == nums[i-1]) {
+                if(count < 2) {
+                    count ++;
+                    nums[j++] = nums[i];
+                }
+
+            } else {
+                count = 1;
+                nums[j++] = nums[i];
+            }
+        }
+        return j;
+    }
+
+
     public List<List<Integer>> combine(int n, int k) {
         internal(n, k, 1, new LinkedList());
         return combineRet;
@@ -1514,4 +2068,5 @@ public class Solution {
         }
         return realRetPre.next;
     }
+
 }
