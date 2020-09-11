@@ -6,6 +6,369 @@ import java.util.*;
 
 public class Solution {
 
+    public void reverseWords(char[] s) {
+        StringBuilder one = new StringBuilder();
+        StringBuilder ret = new StringBuilder();
+        for(int i=0; i<s.length; i++) {
+            if(s[i] != ' ') {
+                one.append(s[i]);
+            } else {
+                if(ret.length() > 0) {
+                    one.append(" ");
+                }
+                ret.insert(0, one);
+                one = new StringBuilder();
+            }
+        }
+        if(ret.length() > 0) {
+            one.append(" ");
+        }
+        ret.insert(0, one);
+        for(int i=0 ; i<ret.length(); i++) {
+            s[i] = ret.charAt(i);
+        }
+    }
+
+    public String fractionToDecimal(int ni, int di) {
+        StringBuilder sb = new StringBuilder();
+        if(ni == 0) {
+            return "0";
+        }
+
+        long n;
+        long d;
+        if(ni <0 ^ di <0) {
+            sb.append("-");
+        }
+        n = Math.abs(Long.valueOf(ni));
+        d = Math.abs(Long.valueOf(di));
+        long beforPoint = n/d;
+        long cur = n % d;
+        sb.append(beforPoint);
+        if(cur == 0) {
+            return sb.toString();
+        }
+        sb.append(".");
+        // key是除数，value是需要插入括号的位置,  2 /3, sb=0.   cur =20,
+        HashMap<Long, Integer> map = new HashMap<>();
+        int j = sb.indexOf(".") + 1;
+
+
+
+        while(cur !=0) {
+            cur *=10;
+//            while(cur < d) {
+//
+//                if(map.containsKey(cur)) {
+//                    sb.append(")");
+//                    sb.insert(map.get(cur), "(");
+//                    return sb.toString();
+//                } else {
+//                    map.put(cur, j++);
+//                }
+//                sb.append("0");
+//                cur *=10;
+//            }
+            if(map.containsKey(cur)) {
+                sb.append(")");
+                sb.insert(map.get(cur), "(");
+                return sb.toString();
+            } else {
+                map.put(cur, j++);
+            }
+
+
+            sb.append(cur /d);
+            cur %= d;
+        }
+
+        return sb.toString();
+
+    }
+
+    public List<String> findMissingRanges(int[] nums, int lower, int upper) {
+        List<String> ret = new LinkedList<>();
+        if(nums == null || nums.length == 0) {
+            add(ret, lower, upper, 4);
+            return ret;
+        }
+        add(ret, lower, nums[0], 1);
+        for(int i=1; i<nums.length; i++) {
+            add(ret, nums[i-1], nums[i],3);
+        }
+        add(ret, nums[nums.length-1], upper,2);
+
+        return ret;
+
+
+    }
+
+    // head 1
+    // tail 2
+    // middle 3
+    // head and tail 4
+    private void add(List<String> ret, int lower, int upper, int flag) {
+
+        StringBuilder sb = new StringBuilder();
+        if(flag == 4) {
+            if(lower < upper) {
+                sb.append(lower);
+                sb.append("->");
+                sb.append(upper);
+            } else {
+                sb.append(lower);
+            }
+            ret.add(sb.toString());
+            return;
+        }
+
+        if(lower == upper) {
+            return;
+        }
+        //1 2
+        if(lower == upper -1) {
+            if(flag == 1) {
+                sb.append(lower);
+            } else if(flag == 2) {
+                sb.append(upper);
+            }
+        }
+
+        //3 5
+
+
+        else {
+            if(flag == 1) {
+                sb.append(lower);
+                sb.append("->");
+                sb.append(upper-1);
+            } else if(flag == 2) {
+                sb.append(lower+1);
+                sb.append("->");
+                sb.append(upper);
+            } else {
+                if(lower == upper -2) {
+                    sb.append(lower + 1);
+                } else {
+                    sb.append(lower + 1);
+                    sb.append("->");
+                    sb.append(upper-1);
+                }
+            }
+        }
+        String ans = sb.toString();
+        if(!"".equals(ans))
+            ret.add(sb.toString());
+    }
+
+    public int lengthOfLongestSubstringTwoDistinct(String s) {
+        int cnt = 2;
+        char[] cs = s.toCharArray();
+        int[] map = new int[256];
+        int i = 0, j = 0;
+        int max = 0;
+        while (j <= cs.length) {
+            if (cnt >= 0) {
+                max = Math.max(max, j - i);
+                if (j == cs.length) break;
+                if (map[cs[j++]]++ == 0) cnt--;
+            } else {
+                if (--map[cs[i++]] == 0) cnt++;
+            }
+        }
+        return max;
+    }
+
+    /*public int lengthOfLongestSubstringTwoDistinct(String s) {
+        if(s == null || s.length() == 0) {
+            return 0;
+        }
+
+        int left = 0;
+        int right = 1;
+        char c1 = s.charAt(left);
+        while(right < s.length() && c1 == s.charAt(right)) {
+            right++;
+        }
+
+        int ret = right - left + 1;
+        if(right >= s.length()) {
+            return s.length();
+        }
+        char c2 = s.charAt(right);
+        int nextleft = right;
+        char nextC = c2;
+        right++;
+        while(right < s.length()) {
+            char c3 = s.charAt(right);
+
+
+            if(c3 == c1 || c3 == c2) {
+                if(c3 != nextC) {
+                    nextC = c3;
+                    nextleft = right;
+                }
+            } else {
+                left = nextleft;
+                nextleft = right;
+                nextC = s.charAt(nextleft);
+                c1 = s.charAt(left);
+                c2 = s.charAt(nextleft);
+            }
+
+
+//aabbc 4
+
+            ret = Math.max(ret, right -left+1);
+            right++;
+        }
+
+        return ret;
+
+    }*/
+
+    public int findMin(int[] nums) {
+        if(nums == null || nums.length == 0) {
+            return -1;
+        }
+        if(nums.length == 1) {
+            return nums[0];
+        }
+        if(nums.length == 2) {
+            return nums[0] >nums[1]?nums[1]:nums[0];
+        }
+
+        int left = 0;
+        int right = nums.length-1;
+        int mid = (left + right) /2;
+        while(left < right) {
+            if(mid -1 >=0) {
+                if(nums[mid-1] < nums[mid]) {
+                    right = mid;
+                } else {
+                    left = mid;
+                }
+            }
+            if( mid + 1< nums.length) {
+                if(nums[mid+1] < nums[mid]) {
+                    left = mid;
+                } else {
+                    right = mid;
+                }
+            }
+            mid = (left + right) /2;
+        }
+        return nums[mid + 1];
+
+    }
+
+    public ListNode sortList(ListNode head) {
+        if(head == null || head.next == null) {
+            return head;
+        }
+        ListNode mid = getMid(head);
+        ListNode midNext = mid.next;
+        mid.next = null;
+        ListNode one = sortList(head);
+        ListNode sec = sortList(midNext);
+
+        return merge(one, sec);
+
+
+    }
+
+    private ListNode merge(ListNode one, ListNode sec) {
+        ListNode dummy = new ListNode(-1);
+        ListNode cur = dummy;
+        while(one != null && sec != null) {
+            if(one.val < sec.val) {
+                cur.next = one;
+                one = one.next;
+            } else {
+                cur.next = sec;
+                sec = sec.next;
+            }
+            cur = cur.next;
+        }
+        if(one != null) {
+            cur.next = one;
+        }
+        if(sec != null) {
+            cur.next = sec;
+        }
+        return dummy.next;
+    }
+
+    private ListNode getMid(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast != null && fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+
+
+    public ListNode insertionSortList(ListNode head) {
+        if(head == null || head.next == null) {
+            return head;
+        }
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode cur = head;
+
+        while(cur.next != null) {
+            ListNode next = cur.next;
+            ListNode temp = dummy;
+            boolean move = false;
+            while(temp.next != null) {
+                if(cur.next.val < temp.next.val) {
+                    ListNode l = cur.next;
+                    cur.next = cur.next.next;
+                    l.next = temp.next;
+                    temp.next = l;
+                    move = true;
+                    break;
+                } else if(temp == cur) {
+                    break;
+                }
+                temp = temp.next;
+            }
+            if(!move) {
+                cur = next;
+            }
+        }
+        return dummy.next;
+    }
+
+    public void reorderList(ListNode head) {
+        if(head == null) {
+            return;
+        }
+        ListNode cur = head;
+        ArrayList<ListNode> alls = new ArrayList<>();
+        while(cur != null) {
+            alls.add(cur);
+            cur = cur.next;
+        }
+        cur = head; //1
+        ListNode tail = alls.get(alls.size()/2);
+        int len = alls.size();
+        for(int i=0; i<=len/2; i++) {
+            ListNode needMove = alls.remove(alls.size() -1); //2
+            needMove.next = cur.next; //2->null
+            cur.next = needMove; //1->2
+
+            if(cur.next != null) {
+                cur = cur.next.next;
+            }
+        }
+        tail.next = null;
+
+    }
+
     List<List<Integer>> combineRet = new LinkedList<>();
     public List<List<Integer>> combine(int n, int k) {
         internal(n, k, 1, new LinkedList());

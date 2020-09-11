@@ -2,8 +2,21 @@ package com.mircrosoft.hard.study.utils;
 
 import com.mircrosoft.hard.study.bean.ListNode;
 
+import java.util.List;
+
 public class Utils {
-    public ListNode string2ListNode(String ss) {
+    public static ListNode arr2ListNode(int[] arr) {
+        ListNode dummy = new ListNode(-1);
+        ListNode curr = dummy;
+        for(int i=0; i<arr.length; i++) {
+            curr.next = new ListNode(arr[i]);
+            curr = curr.next;
+        }
+        return dummy.next;
+    }
+
+    //1->2->3  =>...
+    public static ListNode string2ListNode(String ss) {
         String[] values = ss.split("->");
         ListNode pre = new ListNode(-1);
         ListNode cur = pre;
@@ -16,11 +29,12 @@ public class Utils {
         return pre.next;
     }
 
-    public String print(ListNode head) {
+    public static String print(ListNode head) {
+        ListNode temp = head;
         StringBuilder stringBuilder = new StringBuilder();
-        while(head != null) {
-            stringBuilder.append(head.val + "->");
-            head = head.next;
+        while(temp != null) {
+            stringBuilder.append(temp.val + "->");
+            temp = temp.next;
         }
         stringBuilder.append("null");
 
