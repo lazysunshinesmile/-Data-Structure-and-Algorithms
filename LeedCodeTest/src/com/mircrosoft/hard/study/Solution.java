@@ -5,6 +5,150 @@ import com.mircrosoft.hard.study.bean.ListNode;
 import java.util.*;
 
 public class Solution {
+    private List<List<Integer>> ret = new LinkedList<>();
+    public List<List<Integer>> getFactors(int n) {
+        for(int i=2; i<n/2; i++) {
+            int a = getOne(n, i);
+            if(a == -1) {
+                return ret;
+            }
+            List<Integer> one = new LinkedList<>();
+            one.add(a);
+            List<List<Integer>> bLists = getFactors(n/a);
+            for(int j=0; j<bLists.size(); j++) {
+                one.addAll(bLists.get(j));
+            }
+            ret.add(one);
+        }
+
+        return ret;
+    }
+
+
+
+
+    public int getOne(int n, int i) {
+        for(; i<n/2; i++) {
+            if(n%i == 0) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+    public List<List<String>> groupStrings(String[] strings) {
+        int len = strings.length;
+        HashMap<Integer, LinkedList<String>> map = new HashMap<>();
+        for(int i=0; i<len; i++) {
+            char[] temp = strings[i].toCharArray();
+            int res = 0;
+
+            for(int j=1; j<temp.length; j++) {
+                res += res * 10 + (temp[j] - temp[0] +26) %26;
+            }
+            res += len;
+
+            LinkedList<String> list = map.getOrDefault(res, new LinkedList<String>());
+            list.add(String.valueOf(temp));
+            map.put(res, list);
+        }
+
+
+        return new LinkedList<>(map.values());
+    }
+    public List<String> findStrobogrammatic(int n) {
+        if( n== 1) {
+            findStrobogrammaticRet.add("1");
+            findStrobogrammaticRet.add("8");
+            findStrobogrammaticRet.add("0");
+            return findStrobogrammaticRet;
+        }
+        if(n %2 == 0) {
+            internal(n, 0, "");
+        } else {
+            internal(n, 1,"1");
+            internal(n, 1,"8");
+            internal(n, 1,"0");
+        }
+        return findStrobogrammaticRet;
+    }
+
+    char[][] cs = new char[][]{{'1','1'},{'8','8'}, {'9','6'},{'6','9'},{'0', '0'}};
+    List<String> findStrobogrammaticRet = new LinkedList<>();
+    private void internal(int n, int m, String s) {
+        if(m == n) {
+            return;
+        }
+        if(m == n-2) {
+            for(int i=0; i<4; i++) {
+                findStrobogrammaticRet.add(cs[i][0] + s + cs[i][1]);
+            }
+        } else {
+            for(int i=0;i<5;i++) {
+                internal(n, m+2, cs[i][0] + s + cs[i][1]);
+            }
+        }
+    }
+
+    public List<String> findStrobogrammatic2(int n) {
+        List<String> ret = new LinkedList<>();
+        if(n == 2) {
+            ret.add("11");
+            ret.add("69");
+            ret.add("88");
+            ret.add("96");
+            return ret;
+        }
+        int k = 0;
+        if(n%2 ==1) {
+            ret.add("1");
+            ret.add("8");
+            ret.add("0");
+            k=1;
+        } else {
+            ret.add("11");
+            ret.add("88");
+            ret.add("00");
+            ret.add("69");
+            ret.add("96");
+            k=2;
+        }
+        for(;k<n; k+=2) {
+            List<String> one = new LinkedList<>();
+            for(int i=0; i<ret.size(); i++) {
+                String temp = ret.get(i);
+                one.add("1" + temp + "1");
+                one.add("8" + temp + "8");
+                one.add("6" + temp + "9");
+                one.add("9" + temp + "6");
+                if(k != n-2) {
+                    one.add("0" + temp + "0");
+                }
+            }
+
+            ret = one;
+        }
+
+
+        return ret;
+
+
+    }
+
+    public List<String> findRepeatedDnaSequences(String s) {
+        List<String> ret = new LinkedList<>();
+        Set<String> dictionary = new HashSet<>();
+        for(int i=0; i <= s.length() - 10; i++) {
+            String temp = s.substring(i, i+10);
+            if(dictionary.contains(temp)) {
+                ret.add(temp);
+            } else {
+                dictionary.add(temp);
+            }
+        }
+        return ret;
+    }
 
     public void reverseWords(char[] s) {
         StringBuilder one = new StringBuilder();
@@ -862,21 +1006,21 @@ public class Solution {
         }
 */
     //我的递归
-    List<String> ret = new LinkedList<>();
+    List<String> letterCombinations2Ret = new LinkedList<>();
     int diguicount = 0;
     String[] dictionary = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
     public List<String> letterCombinations2(String digits) {
         if(digits == null || digits.length() == 0) {
-            return ret;
+            return letterCombinations2Ret;
         }
         internal("", digits, 0);
-        return ret;
+        return letterCombinations2Ret;
     }
 
     private void internal(String cur, String digits, int digitsIndex) {
         diguicount++;
         if(digitsIndex == digits.length()) {
-            ret.add(cur);
+            letterCombinations2Ret.add(cur);
             return;
         }
         char[] toAddString = help(digits.charAt(digitsIndex));
