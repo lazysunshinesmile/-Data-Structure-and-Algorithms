@@ -5,35 +5,253 @@ import com.mircrosoft.hard.study.bean.ListNode;
 import java.util.*;
 
 public class Solution {
-    private List<List<Integer>> ret = new LinkedList<>();
+
+    //参考： https://www.bilibili.com/video/BV13t411v7Fs?p=1，并查集查看无向图是否有环
+    public boolean validTree(int n, int[][] edges) {
+        if(n != edges.length + 1) {
+            //4
+            //[[0,1],[2,3]]
+            //除了根节点，应该一个点一条边，
+            return false;
+        }
+
+        //parent[i]表示i的父亲
+        int[] parent = new int[n];
+        //rank[i]表示i的高度
+        int[] rank = new int[n];
+        //parent 和rank都有可能为0
+        Arrays.fill(parent, -1);
+        Arrays.fill(rank, -1);
+
+        for(int i=0; i<edges.length; i++) {
+
+            //找到一个点的根节点
+            int root1 = findRoot(parent, edges[i][0]);
+            //找到另一个点的根节点
+            int root2 = findRoot(parent, edges[i][1]);
+            if(root1 == root2) {
+                //两个根节点一样，说明已经在一棵树上，再连接，就会形成环
+                return false;
+            }
+
+            //下面就是合并两个不同根的树
+            //为了降低树的高度，这样能减少查找根节点的循环，把小树附到大树上
+            if(rank[root1] < rank[root2]) {
+                parent[root1] = root2;
+            } else if(rank[root1] > rank[root2]) {
+                parent[root2] = root1;
+            } else {
+                //两颗树相等高度，随便附，但被附的树会升高。
+                parent[root2] = root1;
+                rank[root1]++;
+            }
+        }
+        return true;
+    }
+
+    private int findRoot(int[] parent, int cur) {
+        while(parent[cur] != -1) {
+            cur = parent[cur];
+        }
+        return cur;
+    }
+
     public List<List<Integer>> getFactors(int n) {
-        for(int i=2; i<n/2; i++) {
-            int a = getOne(n, i);
-            if(a == -1) {
+        return internal(n, 2);
+    }
+
+
+    private List<List<Integer>> internal(int n, int start) {
+        List<List<Integer>> ret = new LinkedList<>();
+        for(int i=start; i*i<=n; i++) {
+
+            if(n%i == 0) {
+                List a = new LinkedList<Integer>();
+                a.add(i);
+                a.add(n/i);
+                ret.add(a);
+
+                List<List<Integer>> temp = internal(n/i, i);
+                for(List one : temp) {
+                    one.add(i);
+                    ret.add(new LinkedList<>(one));
+                }
+
+            }
+        }
+        return ret;
+    }
+
+
+
+    public int getOne(int n, int i) {
+        for(; i*i<=n; i++) {
+            if(n%i == 0) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+    public int strobogrammaticInRange2(String low, String high) {
+        if (low.length() > high.length() || (low.length() == high.length() && low.compareTo(high) > 0)) {
+            return 0;
+        } else if (low.compareTo(high) == 0) {
+            return isStrobogrammatic(low) ? 1 : 0;
+        }
+        return internal(0, low, high, "")
+                + internal(0, low, high, "0")
+                + internal(0, low, high, "1")
+                + internal(0, low, high, "8");
+    }
+
+
+    private int internal(int ret, String low, String high, String current) {
+        if (current.length() > high.length()) {
+            return ret;
+        } else if (current.length() == high.length()) {
+            if (high.compareTo(current) < 0) {
                 return ret;
+            } else {
+                if(current.length() > low.length() || (current.length() == low.length() && low.compareTo(current)<=0)) {
+                    if(!current.startsWith("0") || current.length() == 1) {
+                        System.out.println(current);
+                        ++ret;
+                    }
+                }
             }
-            List<Integer> one = new LinkedList<>();
-            one.add(a);
-            List<List<Integer>> bLists = getFactors(n/a);
-            for(int j=0; j<bLists.size(); j++) {
-                one.addAll(bLists.get(j));
+        } else {
+            if(current.length() > low.length() || (current.length() == low.length() && low.compareTo(current)<=0)) {
+                if(!current.startsWith("0") || current.length() == 1) {
+                    System.out.println(current);
+                    ++ret;
+                }
             }
-            ret.add(one);
+            if (high.length() - current.length() >= 2) {
+                ret = internal(ret, low, high, "1" + current + "1");
+                ret = internal(ret, low, high, "6" + current + "9");
+                ret = internal(ret, low, high, "9" + current + "6");
+                ret = internal(ret, low, high, "8" + current + "8");
+                if (high.length() - current.length() > 2) {
+                    ret = internal(ret, low, high, "0" + current + "0");
+                }
+            }
+        }
+        return ret;
+    }
+
+    public int strobogrammaticInRange(String low, String high) {
+        if(low.length() > high.length() || ( low.length() == high.length() &&low.compareTo(high) > 0)) {
+            return 0;
+        }
+        else if(low.compareTo(high) == 0) {
+           return isStrobogrammatic(low)?1:0;
+        }
+        int lowCount = internal(0, low, "", false) + internal(0, low, "0", false)
+                + internal(0, low, "1", false)
+                + internal(0, low, "8", false);
+        int highCount = internal(0, high, "", true)
+                + internal(0, high, "0", true)
+                + internal(0, high, "1", true)
+                + internal(0, high, "8", true) ;
+        return highCount - lowCount;
+    }
+
+    public boolean isStrobogrammatic(String num) {
+        char[] cs = num.toCharArray();
+        int i=0;
+        int j=cs.length-1;
+
+        while( i<=j) {
+            if((cs[i] == '1' && cs[j] == '1')
+                    || (cs[i] == '0' && cs[j] == '0')
+                    || (cs[i] == '6' && cs[j] == '9')
+                    || (cs[i] == '9' && cs[j] == '6')
+                    || (cs[i] == '8' && cs[j] == '8')
+            ) {
+                i++;
+                j--;
+                continue;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    private int internal(int ret, String high, String current, boolean include) {
+        if(current.length() > high.length()) {
+            return ret;
+        } else if(current.length() == high.length()) {
+            if(high.compareTo(current) < 0) {
+                return ret;
+            } else if(high.compareTo(current) > 0){
+                return ++ret;
+            } else {
+                return include?++ret:ret;
+            }
+        } else {
+            if(!current.startsWith("0") || current.length() == 1) {
+                ret++;
+            }
+            if(high.length() - current.length() >= 2){
+                ret = internal(ret, high, "1"+current + "1", include);
+                ret = internal(ret, high, "6" + current + "9", include);
+                ret = internal(ret, high, "9" + current + "6", include);
+                ret = internal(ret, high, "8" + current + "8", include);
+                if(high.length() - current.length() > 2) {
+                    ret = internal(ret, high, "0" + current + "0", include);
+                }
+            }
         }
 
         return ret;
     }
 
 
+    public void readHelper(String s, int[] ns) {
+        toReadString = s.toCharArray();
+        for(int i=0; i<ns.length; i++) {
+            char[] ret = new char[ns[i]];
+            read(ret, ns[i]);
+            System.out.println(Arrays.toString(ret));
+        }
+    }
 
-
-    public int getOne(int n, int i) {
-        for(; i<n/2; i++) {
-            if(n%i == 0) {
-                return i;
+    private char[] otherData = new char[]{'#','#','#','#'};
+    public int read(char[] buf, int n) {
+        int ret = 0;
+        int tmp = 0;
+        for(int i=0; i<4 && n > 0; i++) {
+            if(otherData[i] != '#') {
+                buf[ret++] = otherData[i];
+                otherData[i] = '#';
+                n--;
             }
         }
-        return -1;
+
+        while(n>0 && (tmp = read4(otherData)) != 0) {
+            for(int i=0; i<tmp && n>0; i++) {
+                buf[ret++] = otherData[i];
+                otherData[i] = '#';
+                n--;
+            }
+        }
+
+
+        return ret;
+    }
+
+
+    private char[] toReadString;
+    private int index=0;
+    private int read4(char[] k) {
+        for(int i=0; i<4 && index < toReadString.length; i++) {
+            k[i] = toReadString[index++];
+        }
+        return index;
     }
 
 

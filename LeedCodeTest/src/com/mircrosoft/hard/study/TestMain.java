@@ -1,12 +1,9 @@
 package com.mircrosoft.hard.study;
 
-import com.mircrosoft.hard.study.bean.ListNode;
-import com.mircrosoft.hard.study.bean.Vector2D;
-import com.mircrosoft.hard.study.utils.Utils;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class TestMain {
     public static void main(String[] args) {
@@ -16,6 +13,15 @@ public class TestMain {
 //        System.out.println(solution.groupStrings(new String[]{"aa","bb","b"}));
 //        ["Vector2D","hasNext","next","hasNext"]
 //[[[[],[3]]],[null],[null],[null]]
-        System.out.println(solution.getFactors(12));
+//        System.out.println(solution.getFactors(12));
+
+
+//        solution.toReadString = "abcde".toCharArray();
+//        System.out.println(solution.strobogrammaticInRange("0","1000"));
+//        System.out.println("9697".compareTo("1111"));
+
+        List<Integer>  a = new LinkedList<>();
+        System.out.println(solution.validTree(4, new int[][]{{0,1},{0,2},{2,5},{3,4},{3,5}}));
+
     }
 }
