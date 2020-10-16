@@ -6,6 +6,26 @@ import java.util.*;
 
 public class Solution {
 
+    public boolean verifyPreorder(int[] preorder) {
+        int[] stack = new int[preorder.length];
+        int curIndex = 0;
+        int min = Integer.MIN_VALUE;
+        stack[0] = preorder[0];
+        for(int i=1; i<preorder.length; i++) {
+           if(preorder[i] < min ) {
+                return false;
+           }
+
+           while(curIndex>=0 && preorder[i] > stack[curIndex]) {
+               min = stack[curIndex--];
+           }
+
+           stack[++curIndex] = preorder[i];
+
+        }
+        return true;
+    }
+
     //参考： https://www.bilibili.com/video/BV13t411v7Fs?p=1，并查集查看无向图是否有环
     public boolean validTree(int n, int[][] edges) {
         if(n != edges.length + 1) {
@@ -49,6 +69,7 @@ public class Solution {
         return true;
     }
 
+    //找根
     private int findRoot(int[] parent, int cur) {
         while(parent[cur] != -1) {
             cur = parent[cur];

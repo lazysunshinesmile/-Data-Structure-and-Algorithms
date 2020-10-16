@@ -21,7 +21,6 @@ public class TestMain {
 //        System.out.println("9697".compareTo("1111"));
 
         List<Integer>  a = new LinkedList<>();
-        System.out.println(solution.validTree(4, new int[][]{{0,1},{0,2},{2,5},{3,4},{3,5}}));
-
+        System.out.println(solution.verifyPreorder(new int[]{5,2,1,3,6}));
     }
 }
