@@ -1,10 +1,296 @@
 package com.mircrosoft.hard.study;
 
 import com.mircrosoft.hard.study.bean.ListNode;
+import javafx.util.Pair;
 
 import java.util.*;
 
 public class Solution {
+
+    public String encode(List<String> strs) {
+        if(strs == null) {
+            return null;
+        }
+        StringBuilder sb = new StringBuilder("");
+        for(String s : strs) {
+            if(s.length() == 0) {
+                sb.append("kong");
+            } else {
+                sb.append(s);
+            }
+            sb.append("end#");
+        }
+        return sb.toString();
+    }
+
+    // Decodes a single string to a list of strings.
+    public List<String> decode(String s) {
+        if(s == null) {
+            return null;
+        }
+        List<String> ret = new LinkedList<>();
+        if(s.length() == 0) {
+            return ret;
+        }
+        String[] ss = s.split("end#");
+        for(int i=0; i<ss.length; i++) {
+            if(ss[i].equals("kong")) {
+                ret.add("");
+            } else {
+                ret.add(ss[i]);
+            }
+        }
+
+        return ret;
+
+    }
+
+
+    public int bestTeamScore(int[] scores, int[] ages) {
+        List<Pair<Integer, Integer>> scores_age = new LinkedList<>();
+        for(int i=0; i<scores.length; i++) {
+            scores_age.add(new Pair<>(scores[i], ages[i]));
+        }
+        Collections.sort(scores_age, (p1, p2) -> {
+                if(p2.getValue() - p1.getValue() !=0) {
+                    return p2.getValue() - p1.getValue();
+                } else {
+                    return p2.getKey() - p1.getKey();
+                }
+        });
+
+        int[] dp = new int[scores.length];
+        dp[0] = scores_age.get(0).getKey();
+        for(int i=1; i<scores.length; i++) {
+            int t = scores_age.get(i).getKey();
+            dp[i] = t;
+            for(int j=0; j<i; j++) {
+                if(scores_age.get(j).getKey() >= scores_age.get(i).getKey()) {
+                    int temp = t + dp[j];
+                    dp[i] = dp[i] > temp ? dp[i]:temp;
+                }
+            }
+        }
+
+        int ret = 0;
+        for(int i=0; i<scores.length; i++) {
+            ret = dp[i]> ret?dp[i]:ret;
+        }
+
+        return ret;
+    }
+
+    public String findLexSmallestString(String s, int a, int b) {
+        if(s.length() <= 1 ) {
+            return s;
+        }
+
+        String temp = s;
+
+
+        HashSet<String> visitedStr = new HashSet<>();
+
+        int i = s.charAt(1) - '0';
+        String ret = "";
+
+        int skip = 2;
+        if(b%2 ==1) {
+            skip = 1;
+        }
+
+
+        while(!visitedStr.contains(temp))  {
+//            System.out.println(temp);
+            visitedStr.add(temp);
+            String one = temp;
+            HashSet<Integer> visited = new HashSet<>();
+            while(!visited.contains(i)) {
+                visited.add(i);
+                for(int j=1; j<temp.length(); j+=2) {
+                    int k = (one.charAt(j) -'0' + a)%10;
+
+
+                    one = one.substring(0, j) + k + one.substring(j+1);
+                }
+//                System.out.println("1  one:" + one);
+                ret = ret.equals("") || ret.compareTo(one) > 0?one : ret;
+
+                if(b%2==1) {
+                    HashSet<Integer> visited2 = new HashSet<>();
+                    int z = s.charAt(0) - '0';
+                    while(!visited2.contains(z)) {
+                        visited2.add(z);
+                        for (int j = 0; j < temp.length(); j += 2) {
+                            int k = (one.charAt(j) - '0' + a) % 10;
+
+
+                            one = one.substring(0, j) + k + one.substring(j + 1);
+                        }
+                        ret = ret.equals("") || ret.compareTo(one) > 0 ? one : ret;
+                        z = (z + a) % 10;
+//                        System.out.println("2  one:" + one);
+                    }
+                }
+
+//                System.out.println(one);
+
+//                if(b%2==1) {
+//                    String another = findLexSmallestString(one, a, b);
+//                    ret = ret.compareTo(another) > 0?another : ret;
+//                }
+                i=(i + a)%10;
+            }
+
+            temp = temp.substring(b) + temp.substring(0, b);
+        }
+        return ret;
+    }
+
+
+    public List<String> generatePalindromes(String s) {
+        List<String> ret = new LinkedList<>();
+
+        char[] cs = s.toCharArray();
+        Map<Character, Integer> count = new HashMap<>();
+
+        for(int i=0; i< cs.length; i++) {
+            int c = count.getOrDefault(cs[i], 0);
+            count.put(cs[i], ++c);
+
+        }
+        String res = "";
+        for(Map.Entry<Character, Integer> entry: count.entrySet()) {
+            if(entry.getValue() %2 !=0 && res.length() == 0) {
+                res = entry.getKey()+"";
+            } else if(entry.getValue() %2 !=0 && res.length() != 0) {
+                return ret;
+            }
+
+        }
+        if(res.length()!=0 && count.get(res.charAt(0)) == 1) {
+            count.remove(res.charAt(0));
+        }
+
+
+
+        return internal(count, res, s.length(), new LinkedList<>());
+    }
+
+    private List<String> internal(Map<Character, Integer> all, String cur, int targetLen, List<String> ret) {
+
+        if (cur.length() == targetLen) {
+            ret.add(cur);
+            return ret;
+        }
+
+        for(Map.Entry<Character, Integer> entry: all.entrySet()) {
+            char c = entry.getKey();
+            int co = entry.getValue();
+            if(co == 0) {
+                continue;
+            }
+            all.put(c,co-2);
+            internal(all, c+cur+c, targetLen, ret);
+            all.put(c, co);
+        }
+        return ret;
+    }
+
+
+    public int threeSumSmaller(int[] nums, int target) {
+        Arrays.sort(nums);
+        int ret = 0;
+        for(int j=0; j<nums.length; j++) {
+            int low = j+1;
+            int high = nums.length-1;
+            while(low < high) {
+                int sum = nums[j] + nums[low] + nums[high];
+                if(sum < target) {
+                    ret+= high -low;
+                    low++;
+                } else {
+                    high--;
+                }
+            }
+        }
+        return ret;
+    }
+
+    public String alienOrder(String[] words) {
+        // k->v    key:k, val:{... ,v}
+        Map<Character, Set<Character>> dic = new HashMap<>();
+        int[] rudu = new int[26];
+        Arrays.fill(rudu, -1);
+        int[] count = new int[26];
+        if(words.length == 1) {
+            return words[0];
+        }
+
+        for(int i=0; i<words.length-1; i++) {
+            char[] str1 = words[i].toCharArray();
+            char[] str2 = words[i+1].toCharArray();
+            if(str2.length < str1.length && words[i].startsWith(words[i+1])) {
+                return "";
+            }
+            for(int j=0; j<str1.length; j++) {
+                count[str1[j]-'a'] = 1;
+            }
+            for(int j=0; j<str2.length; j++) {
+                count[str2[j]-'a'] = 1;
+            }
+
+            for(int j=0; j<str1.length && j<str2.length; j++) {
+                if(str1[j] == str2[j]) {
+                    continue;
+                } else {
+                    Set<Character> sons = dic.getOrDefault(str1[j], new HashSet<Character>());
+                    if(!sons.contains(str2[j])) {
+                        sons.add(str2[j]);
+                        rudu[str2[j] - 'a']++;
+                        dic.put(str1[j], sons);
+                    }
+                    break;
+                }
+            }
+        }
+
+
+        StringBuilder ret = new StringBuilder();
+        //拓扑排序
+        while(true) {
+            boolean modify = false;
+            for(int i=0; i<rudu.length; i++) {
+                if(count[i] !=0 && rudu[i] == -1) {
+                    modify = true;
+                    count[i] = 0;
+                    char c = (char)(i+97);
+                    ret.append(c);
+                    Set<Character> sons = dic.get(c);
+                    if(sons != null) {
+                        for(char son : sons) {
+                            rudu[son-'a']--;
+                        }
+                    }
+                }
+            }
+            if(!modify) {
+                //有环或结束
+                for(int i=0; i<rudu.length; i++) {
+                    if(rudu[i] != -1) {
+                        return "";
+                    }
+                }
+
+                break;
+            }
+        }
+        return ret.toString();
+
+
+
+
+
+    }
 
     public boolean verifyPreorder(int[] preorder) {
         int[] stack = new int[preorder.length];
