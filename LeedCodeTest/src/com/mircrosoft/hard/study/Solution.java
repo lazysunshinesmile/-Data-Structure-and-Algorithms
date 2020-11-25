@@ -1,11 +1,393 @@
 package com.mircrosoft.hard.study;
 
 import com.mircrosoft.hard.study.bean.ListNode;
+import com.mircrosoft.hard.study.bean.TreeNode;
 import javafx.util.Pair;
 
 import java.util.*;
 
 public class Solution {
+    public int longestConsecutive(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+        int ret = 1;
+        return internal(root, 1, 1);
+        // Stack<TreeNode> stack = new Stack<>();
+        // stack.push(root);
+
+        // int temp = 0;
+        // while(!stack.isEmpty()) {
+        //     TreeNode cur = stack.pop();
+
+        //     internal(cur, 1);
+
+        //     if(cur.right != null) {
+        //         stack.push(cur.right);
+        //     }
+        //     if(cur.left != null) {
+        //         stack.push(item)
+        //     }
+        // }
+    }
+
+    private int internal(TreeNode cur, int ret, int curval) {
+        if(cur.left != null) {
+            if(cur.left.val - cur.val == 1) {
+                ret = Math.max(internal(cur.left, ret,curval + 1), curval + 1) ;
+            } else {
+                ret = Math.max(internal(cur.left, ret,1), curval);
+            }
+        }
+
+        if(cur.right != null) {
+            if(cur.right.val - cur.val == 1) {
+                ret = Math.max(internal(cur.right, ret,curval + 1), curval + 1);
+            } else {
+                ret = Math.max(internal(cur.right, ret,1), curval);
+            }
+        }
+
+        return ret;
+    }
+
+
+    /**
+     * 有必赢的第一步走法，，，反面：无论怎么走，都有可能输
+     * @param s
+     * @return
+     */
+    public boolean canWin(String s) {
+        if(s== null || s.length() <= 1) {
+            return false;
+        }
+        char[] cs = s.toCharArray();
+
+
+        for(int i=0; i<s.length()-1; i++) {
+            if(cs[i] == '+' && cs[i+1] == '+') {
+                cs[i] = '-';
+                cs[i+1] = '-';
+                if(!canWin(String.valueOf(cs))) {
+                    return  true;
+                }
+                cs[i] = '+';
+                cs[i+1] = '+';
+            }
+        }
+
+        return false;
+    }
+
+    private HashMap<Character, String> dic = new HashMap<>();
+    public boolean wordPatternMatch(String pattern, String s) {
+        if(pattern == null) {
+            return s == null;
+        }
+        if(pattern.length() == 0) {
+            return s.length()== 0;
+        }
+        if(pattern.length() > s.length()) {
+            return false;
+        }
+        char c = pattern.charAt(0);
+        String val = dic.get(c);
+        if(val != null) {
+            if(s.startsWith(val)) {
+                return wordPatternMatch(pattern.substring(1), s.substring(val.length()));
+            } else {
+                return false;
+            }
+        } else {
+            for(int i=1; i<=s.length(); i++) {
+                val = s.substring(0, i);
+                if(dic.containsValue(val)) {
+                    continue;
+                }
+                dic.put(c, val);
+                if(wordPatternMatch(pattern.substring(1), s.substring(val.length()))) {
+                    return true;
+                }
+                dic.remove(c);
+            }
+        }
+
+        return false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    class Edge {
+        int start;
+        int end;
+        int quan;
+
+        public Edge() {
+        }
+
+        public Edge(int start, int end, int quan) {
+            this.start = start;
+            this.end = end;
+            this.quan = quan;
+        }
+
+        @Override
+        public String toString() {
+            return "start:" + start + ", end:" + end + ", quan:" + quan;
+        }
+    }
+    public int minimumEffortPath(int[][] heights) {
+        //heights[i][j] = 12, 表示点i到点j的权值是12
+        int row = heights.length;
+        int line = heights[0].length;
+        int eCount = (row-1)*line + (line-1)*row;
+        Edge[] edges = new Edge[eCount];
+        int k=0;
+        for(int i=0; i<row; i++) {
+            for(int j=0; j<line; j++) {
+                if(j < line-1) {
+                    Edge edge = new Edge();
+                    edge.start = i*line +j;
+                    edge.end = i* line + j+1;
+                    edge.quan = Math.abs(heights[i][j]-heights[i][j+1]);
+                    edges[k++] = edge;
+                }
+                if(i <row-1) {
+                    edges[k++] = new Edge(i*line +j, (i+1)*line +j,
+                            Math.abs(heights[i][j]-heights[i+1][j]));
+                }
+            }
+        }
+
+        Arrays.sort(edges, (e1, e2) -> {
+            return e1.quan - e2.quan;
+        });
+
+        //并查集
+        int[] parent = new int[row*line];
+        int[] rank = new int[row*line];
+        Arrays.fill(parent , -1);
+        Arrays.fill(rank, 1);
+        int ret = 0;
+        for(int i=0; i<eCount; i++) {
+            Edge edge = edges[i];
+            int a = getRoot(parent, edge.start);
+            int b = getRoot(parent, edge.end);
+            if (a == b) {
+                continue;
+            }
+
+            ret = Math.max(ret, edge.quan);
+            if(rank[edge.start] < rank[edge.end]) {
+                parent[edge.start] = edge.end;
+            }else if(rank[edge.start] > rank[edge.end]) {
+                parent[edge.end] = edge.start;
+            } else {
+                if(edge.start < edge.end) {
+                    parent[edge.end] = edge.start;
+                    rank[edge.end] += rank[edge.start];
+                } else {
+                    parent[edge.start] = edge.end;
+                    rank[edge.start] += rank[edge.end];
+                }
+            }
+
+            if(getRoot(parent, 0) == getRoot(parent, row*line-1)) {
+                return ret;
+            }
+        }
+        return 12;
+
+    }
+
+    private int getRoot(int[] parent, int son) {
+
+        while(parent[son] != -1) {
+            son = parent[son];
+        }
+
+        return son;
+    }
+
+    private int getRoot2(int[] parent, int son) {
+
+        while(parent[son] != -1) {
+            System.out.println(son);
+            son = parent[son];
+        }
+
+        return son;
+    }
+
+
+    public int minimumEffortPath2(int[][] heights) {
+        int ret = 0;
+        boolean[][] hasUsed = new boolean[heights.length][heights[0].length];
+        hasUsed[0][0] = true;
+        int[][] dp = new int[heights.length][heights[0].length];
+        for(int i=0; i<heights.length; i++) {
+            Arrays.fill(dp[i], Integer.MAX_VALUE);
+        }
+        return internal(heights, 0, 0, ret, hasUsed, dp);
+    }
+
+    private int internal(int[][] heights, int i, int j, int ret, boolean[][] hasUsed, int[][] dp) {
+        int m1 = Integer.MAX_VALUE;
+        int m2 = Integer.MAX_VALUE;
+        int m3 = Integer.MAX_VALUE;
+        int m4 = Integer.MAX_VALUE;
+
+        if(i == heights.length -1 && j == heights[0].length -1) {
+            return ret;
+        }
+
+        if(i-1 >=0 && !hasUsed[i-1][j]) {
+            int temp =Math.max( Math.abs(heights[i][j] - heights[i-1][j]), ret);
+            if(dp[i-1][j] > temp) {
+                hasUsed[i-1][j] = true;
+                dp[i-1][j] = temp;
+                m1 = internal(heights, i-1, j, temp, hasUsed, dp);
+                hasUsed[i-1][j] = false;
+
+            }
+        }
+        if(i+1 < heights.length && !hasUsed[i+1][j]) {
+            int temp  =Math.max( Math.abs(heights[i][j] - heights[i+1][j]), ret);
+            if(dp[i+1][j] > temp) {
+                hasUsed[i+1][j] = true;
+                dp[i+1][j] = temp;
+                m2 = internal(heights, i+1, j, temp, hasUsed,dp);
+                hasUsed[i+1][j] = false;
+            }
+        }
+
+        if(j+1 <heights[0].length && !hasUsed[i][j+1]) {
+            int temp  =Math.max( Math.abs(heights[i][j] - heights[i][j+1]), ret);
+            if(dp[i][j+1] > temp) {
+                hasUsed[i][j+1] = true;
+                dp[i][j+1] = temp;
+                m3 = internal(heights, i, j+1, temp, hasUsed,dp);
+                hasUsed[i][j+1] = false;
+            }
+        }
+        if(j-1 >= 0 && !hasUsed[i][j-1]) {
+            int temp  =Math.max( Math.abs(heights[i][j] - heights[i][j-1]), ret);
+            if(dp[i][j-1] > temp) {
+                hasUsed[i][j-1] = true;
+                dp[i][j-1] = temp;
+                m4 = internal(heights, i, j-1, temp, hasUsed,dp);
+                hasUsed[i][j-1] = false;
+            }
+        }
+        for(int k=0; k<heights.length; k++) {
+            System.out.println(Arrays.toString(dp[k]));
+        }
+
+        return Math.min(Math.min(Math.min(m1, m2), m3), m4);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private int[][] knowsGragh;
+    public void findCelebrityHelper(int[][] gragh) {
+        knowsGragh = gragh;
+        System.out.println(findCelebrity(gragh.length));
+    }
+
+    private boolean knows(int k, int i) {
+        return knowsGragh[k][i] == 1;
+    }
+
+    public int findCelebrity(int n) {
+        int candidate = 0;
+
+        for(int i =1;i<n;i++){
+            if(knows(candidate, i)){
+                candidate = i;
+            }
+        }
+
+        for(int i=0;i<n;i++){
+            if(i != candidate && (knows(candidate, i) || !knows(i, candidate))){
+                return -1;
+            }
+        }
+        return candidate;
+
+    }
+
+
+
+    public List<Integer> closestKValues(TreeNode root, double target, int k) {
+        Stack<TreeNode> stack = new Stack();
+        LinkedList<Pair<Integer, Double>> alls = new LinkedList<>();
+
+        stack.push(root);
+        while(!stack.isEmpty()) {
+            TreeNode t = stack.pop();
+            alls.add(new Pair(t.val, Math.abs(t.val - target)));
+            if(t.right != null) {
+                stack.push(t.right);
+            }
+            if(t.left != null) {
+                stack.push(t.left);
+            }
+
+        }
+
+
+        Collections.sort(alls, (p1,p2) -> {
+            if(p1.getValue() - p2.getValue() < 0) {
+                return -1;
+            } else if(p1.getValue() - p2.getValue() > 0) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+
+        List<Integer> ret = new LinkedList<>();
+        for(int i=0; i<k; i++) {
+            ret.add(alls.get(i).getKey());
+        }
+        return ret;
+
+    }
 
     public String encode(List<String> strs) {
         if(strs == null) {
@@ -40,7 +422,6 @@ public class Solution {
                 ret.add(ss[i]);
             }
         }
-
         return ret;
 
     }

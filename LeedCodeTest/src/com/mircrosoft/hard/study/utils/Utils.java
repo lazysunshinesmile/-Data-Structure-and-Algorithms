@@ -1,8 +1,14 @@
 package com.mircrosoft.hard.study.utils;
 
 import com.mircrosoft.hard.study.bean.ListNode;
+import com.mircrosoft.hard.study.bean.TreeNode;
+import javafx.util.Pair;
+import sun.reflect.generics.tree.Tree;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
 
 public class Utils {
     public static ListNode arr2ListNode(int[] arr) {
@@ -39,5 +45,30 @@ public class Utils {
         stringBuilder.append("null");
 
         return stringBuilder.toString();
+    }
+
+    public static TreeNode string2TreeNode(String s) {
+        s = s.substring(1, s.length()-1);
+        String[] ss = s.split(",");
+        System.out.println(ss.length);
+        TreeNode root = new TreeNode(Integer.parseInt(ss[0]));
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        for(int i=1; i<ss.length; i+=2) {
+            TreeNode pa = queue.poll();
+            if(!ss[i].equals("null")) {
+                TreeNode left = new TreeNode(Integer.parseInt(ss[i]));
+                pa.left = left;
+                queue.add(left);
+            }
+            if(i+1<ss.length && !ss[i+1].equals("null")) {
+                TreeNode right = new TreeNode(Integer.parseInt(ss[i+1]));
+                pa.right = right;
+                queue.add(right);
+            }
+        }
+
+        return root;
+
     }
 }
