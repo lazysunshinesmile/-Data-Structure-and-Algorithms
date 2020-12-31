@@ -2,13 +2,9 @@ package com.mircrosoft.hard.study.utils;
 
 import com.mircrosoft.hard.study.bean.ListNode;
 import com.mircrosoft.hard.study.bean.TreeNode;
-import javafx.util.Pair;
-import sun.reflect.generics.tree.Tree;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
-import java.util.Stack;
 
 public class Utils {
     public static ListNode arr2ListNode(int[] arr) {

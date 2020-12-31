@@ -1,5 +1,6 @@
 package com.mircrosoft.hard.study;
 
+import com.mircrosoft.hard.study.bean.Edge;
 import com.mircrosoft.hard.study.bean.ListNode;
 import com.mircrosoft.hard.study.bean.TreeNode;
 import javafx.util.Pair;
@@ -7,6 +8,125 @@ import javafx.util.Pair;
 import java.util.*;
 
 public class Solution {
+    public List<Integer> numIslands3(int m, int n, int[][] positions) {
+        List<Integer> ret = new LinkedList<>();
+        int[][] all = new int[m][n];
+        UnionFind unionFind = new UnionFind(m*n);
+        int[][] dic = new int[][] {
+                {0,1},
+                {0,-1},
+                {-1,0},
+                {1,0}
+        };
+        int count = 0;
+        for(int i=0; i<positions.length; i++) {
+            int row = positions[i][0];
+            int line = positions[i][1];
+            int add = 1;
+            if(all[row][line] == 1) {
+                ret.add(count);
+                continue;
+            }
+            all[row][line] = 1;
+            for(int j=0; j<4; j++) {
+                int orow = row + dic[j][0];
+                int oline = line + dic[j][1];
+                if(oline < 0 || oline >=n || orow < 0 || orow >= m || all[orow][oline] == 0) {
+                    continue;
+                }
+                boolean isMerge = unionFind.add(index(row, line, n), index(orow, oline, n));
+                if(isMerge) {
+                    add -=1;
+                }
+            }
+            count += add;
+            ret.add(count);
+        }
+        return ret;
+    }
+
+    public List<Integer> numIslands2(int m, int n, int[][] positions) {
+        List<Integer> ret = new LinkedList<>();
+        int[][] all = new int[m][n];
+        int[] rank = new int[m*n];
+        int[] parents = new int[m*n];
+        Arrays.fill(parents, -1);
+        int[][] dic = new int[][] {
+                {0,1},
+                {0,-1},
+                {-1,0},
+                {1,0}
+        };
+        //parent[k] = z*i +j;
+        int count =0;
+        for(int i=0; i<positions.length; i++) {
+            int add = 1;
+            int row = positions[i][0];
+            int line = positions[i][1];
+            int in = index(row,line, n);
+            if(all[row][line] == 1) {
+                ret.add(count);
+                continue;
+            }
+            parents[in] = in;
+            all[row][line] = 1;
+            for(int j=0; j<4; j++) {
+                int k = dic[j][0] + row;
+                int l = dic[j][1] + line;
+                if(k < 0|| k>=m || l < 0||l>=n || all[k][l] == 0) {
+                    continue;
+                } else {
+                    int oi = index(k, l, n);
+                    int op = getParent(oi, parents);
+                    int p = getParent(in, parents);
+                    if(op != p) {
+                        add -= 1;
+                        if(rank[p] < rank[op]) {
+                            parents[p] = op;
+                        } else if(rank[p] > rank[op]) {
+                            parents[op] = p;
+                        } else {
+                            parents[op] = p;
+                            rank[p]++;
+                        }
+
+                    }
+                }
+            }
+            count +=add;
+            ret.add(count);
+        }
+        return ret;
+    }
+
+    private int getParent (int i, int[] parents) {
+        while(parents[i] != -1 && parents[i] != i) {
+            i = parents[i];
+        }
+
+        return i;
+    }
+
+    private int index(int i, int j, int m) {
+        return m*i+j;
+    }
+
+
+    public int concatenatedBinary(int n) {
+        int len = 0;
+        long ret = 0;
+        long mod = (long)Math.pow(10, 9) + 7;
+        for(int i=1; i<=n; i++) {
+            if((i &(i-1) )== 0) {
+                len ++;
+            }
+            ret = ((long)(ret << len) + i) % mod;
+        }
+
+        return (int)ret;
+    }
+
+
     public int longestConsecutive(TreeNode root) {
         if(root == null) {
             return 0;
@@ -136,25 +256,7 @@ public class Solution {
 
 
 
-    class Edge {
-        int start;
-        int end;
-        int quan;
 
-        public Edge() {
-        }
-
-        public Edge(int start, int end, int quan) {
-            this.start = start;
-            this.end = end;
-            this.quan = quan;
-        }
-
-        @Override
-        public String toString() {
-            return "start:" + start + ", end:" + end + ", quan:" + quan;
-        }
-    }
     public int minimumEffortPath(int[][] heights) {
         //heights[i][j] = 12, 表示点i到点j的权值是12
         int row = heights.length;
