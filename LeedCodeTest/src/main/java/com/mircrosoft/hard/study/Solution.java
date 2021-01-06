@@ -8,6 +8,190 @@ import javafx.util.Pair;
 import java.util.*;
 
 public class Solution {
+    public int minOperations(int[] target, int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return target == null ? 0 : target.length;
+        }
+        //将arr的数字转化为在target中的index,然后求出最长严格递增子序列
+        //若arr[i]在target中不存在，则标记为-1
+        int n = arr.length;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < target.length; i++) {
+            map.put(target[i], i);
+        }
+        for (int i = 0; i < n; i++) {
+            arr[i] = map.getOrDefault(arr[i], -1);
+        }
+        //len是目前发现的最长上升子序列的长度
+        int len = 0;
+        //长度为len的上升子序列的最后一个数字的最小值是is[len - 1]
+        //is 是最长子串的大概雏形。
+        int[] is = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (arr[i] < 0) {
+                continue;
+            }
+            if (len == 0 || arr[i] > is[len - 1]) {
+                len++;
+                is[len - 1] = arr[i];
+                continue;
+            }
+
+            //二分查找L满足is[L - 1] < arr[i] < is[L]，然后更新is[L]
+            int l = 0;
+            int r = len - 1;
+            int mid;
+            while (l < r) {
+                mid = l + ((r - l) >> 1);
+                if (is[mid] < arr[i]) {
+                    l = mid + 1;
+                } else {
+                    if (mid - 1 >= l && is[mid - 1] < arr[i]) {
+                        l = mid;
+                        break;
+                    }
+                    r = mid - 1;
+                }
+            }
+            is[l] = arr[i];
+        }
+
+        return target.length - len;
+    }
+
+    public int minOperations3(int[] target, int[] arr) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i=0; i<target.length; i++) {
+            map.put(target[i], i);
+        }
+
+        int[] stack = new int[arr.length];
+        int len = 0;
+        for(int i=0; i<arr.length; i++) {
+            int index = map.getOrDefault(arr[i], -1);
+            if(index != -1) {
+                if(i==0 || index > stack[i-1]) {
+                    len++;
+                    stack[i] = index;
+                    continue;
+                }
+                replaceLittleBiggerIt(stack, index, i);
+                stack[i] = stack[i-1];
+            } else {
+                if(i==0) {
+                    stack[i] = -1;
+                } else {
+                    stack[i] = stack[i-1];
+                }
+            }
+        }
+
+        return target.length-len;
+    }
+    private void replaceLittleBiggerIt(int[] stack, int target, int len) {
+        /*int j = stack.size()-1;
+        while(j >=0 && stack.get(j) >= target){
+            j--;
+        }
+        stack.set(j+1, target);*/
+
+        //binery search
+
+        int l = 0;
+        int r = len-1;
+        while(l != r) {
+            int mid = (l+r)/2;
+            int midV = stack[mid];
+            if(midV == -1) {
+
+            }
+            if(midV < target) {
+                l = mid +1;
+            } else if(midV> target) {
+                if(mid-1>=0 && stack[mid-1] < target) {
+                    l = mid;
+                    break;
+                }
+                r = mid;
+            } else {
+                l = mid;
+                break;
+            }
+        }
+        int k = stack[l];
+        while(l < len && stack[l] == k) {
+            stack[l++] = target;
+        }
+    }
+
+    public int minOperations2(int[] target, int[] arr) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i=0; i<target.length; i++) {
+            map.put(target[i], i);
+        }
+
+        Stack<Integer> stack = new Stack<>();
+        for(int i=0; i<arr.length; i++) {
+            int index = map.getOrDefault(arr[i], -1);
+            if(index != -1 && stack.size() != 0) {
+                if(index > stack.peek()) {
+                    stack.push(index);
+                    continue;
+                }
+                replaceLittleBiggerIt2(stack, index);
+            } else if(index != -1) {
+                stack.push(index);
+            }
+        }
+
+        return target.length-stack.size();
+    }
+    private void replaceLittleBiggerIt2(Stack<Integer> stack, int target) {
+        /*int j = stack.size()-1;
+        while(j >=0 && stack.get(j) >= target){
+            j--;
+        }
+        stack.set(j+1, target);*/
+
+        //binery search
+
+        int l = 0;
+        int r = stack.size()-1;
+        while(l != r) {
+            int mid = (l+r)/2;
+            int midV = stack.get(mid);
+            if(midV < target) {
+                l = mid +1;
+            } else if(midV> target) {
+                r = mid;
+            } else {
+                l = mid;
+                break;
+            }
+        }
+        stack.set(l, target);
+    }
+
+    public int[][] multiply(int[][] A, int[][] B) {
+        int row = A.length;
+        int line = B[0].length;
+
+        int count = A[0].length;
+
+        int[][] ret = new int[row][line];
+        for(int i=0; i<row; i++) {
+            for(int j=0; j<line; j++) {
+                int val = 0;
+                for(int k=0; k<count; k++) {
+                    val += A[i][k] * B[k][j];
+                }
+                ret[i][j] = val;
+            }
+        }
+        return ret;
+    }
+
+
     public List<Integer> numIslands3(int m, int n, int[][] positions) {
         List<Integer> ret = new LinkedList<>();
         int[][] all = new int[m][n];
