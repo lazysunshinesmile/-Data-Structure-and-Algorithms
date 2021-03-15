@@ -8,6 +8,89 @@ import javafx.util.Pair;
 import java.util.*;
 
 public class Solution {
+
+    public int countRestrictedPaths(int n, int[][] es) {
+        int[] dis = new int[n+1];
+        int[][] edges = new int[n+1][n+1];
+
+
+        for(int i=0; i<es.length; i++) {
+            edges[es[i][0]][es[i][1]] =es[i][2];
+            edges[es[i][1]][es[i][0]] =es[i][2];
+        }
+
+        List<List> routes = new LinkedList<>();
+
+        for(int i=1; i<n; i++) {
+            if(dis[i] != 0) {
+                continue;
+            }
+
+            int minDis = Integer.MAX_VALUE;
+            Queue<List<Integer>> q = new LinkedList<>();
+            List<List> allRoutes = new LinkedList<>();
+
+            List<Integer> l = new LinkedList<>();
+            l.add(0);
+            l.add(i);
+
+            q.add(l);
+
+
+            while(!q.isEmpty()) {
+                List<Integer> route = q.poll();
+                int currp = route.get(route.size() -1);
+                if(currp == n) {
+                    minDis = Math.min(minDis, route.get(0));
+                    allRoutes.add(route);
+                    continue;
+                }
+                for(int k=1; k<n+1; k++) {
+                    if(edges[currp][k] != 0 && (!route.contains(k) || route.lastIndexOf(k) == 0)) {
+                        List<Integer> nRoute = new LinkedList<>();
+                        nRoute.addAll(route);
+                        nRoute.set(0, edges[currp][k] + nRoute.get(0));
+                        nRoute.add(k);
+                        q.add(nRoute);
+                    }
+                }
+            }
+
+            dis[i] = minDis;
+            if(i==1)
+                routes.addAll(allRoutes);
+            for(int j=0; j<allRoutes.size(); j++) {
+                List<Integer> route = allRoutes.get(j);
+                if(route.get(0) == minDis) {
+                    int t = minDis;
+                    for(int k=2; k<route.size(); k++) {
+                        t -= edges[route.get(k-1)][route.get(k)];
+                        dis[route.get(k)] = t;
+                    }
+                }
+            }
+        }
+        System.out.println(Arrays.toString(dis));
+        long ret = 0;
+        for(int i=0; i<routes.size(); i++) {
+            List<Integer> route = routes.get(i);
+            boolean add = true;
+            if(route.size() <= 3) {
+                continue;
+            }
+            for(int j=2; j<route.size(); j++) {
+                if(dis[route.get(j-1)] <= dis[route.get(j)]) {
+                    add = false;
+                }
+            }
+            if(add) {
+                System.out.println(Arrays.toString(route.toArray()));
+                ret ++;
+            }
+        }
+
+        return (int)(ret % 1000000007);
+    }
     public int maxValue(int[][] events, int k) {
         Arrays.sort(events, (int[] a, int[] b) -> {
             if (a[0] != b[0]) {
