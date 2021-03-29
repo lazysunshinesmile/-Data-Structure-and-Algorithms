@@ -9,6 +9,59 @@ import java.util.*;
 
 public class Solution {
 
+    public int getNumberOfBacklogOrders(int[][] orders) {
+        // orders = new int[][] {{7,1000000000,1},{15,3,0},{5,999999995,0},{5,1,1}};
+        Map<Integer, Long> buy = new TreeMap<>((i1, i2)-> {
+            return i2-i1;
+        });
+        Map<Integer, Long> sell = new TreeMap<>();
+        for(int i=0; i<orders.length; i++) {
+            int[] order = orders[i];
+            if(order[2] == 0) {
+                internal(order, sell, true);
+                internal(order, buy);
+            } else {
+                internal(order, buy, false);
+                internal(order, sell);
+            }
+        }
+        long ret = internal(buy) + internal(sell);
+        return (int)(ret%1000000007);
+
+
+    }
+
+    void internal(int[] order, Map<Integer, Long> data) {
+        long amount = data.getOrDefault(order[0], 0l) + order[1];
+        data.put(order[0], amount);
+
+    }
+
+    int internal(Map<Integer, Long> data) {
+        int ret = 0;
+        for(int key: data.keySet()) {
+            ret += data.get(key);
+        }
+        return ret;
+    }
+
+    void internal(int[] order, Map<Integer, Long> data, boolean isBuy) {
+        for(int key: data.keySet()) {
+            if((isBuy && order[0]>=key) || (!isBuy && order[0] <=key)) {
+                long rest = data.get(key) -order[1];
+                if(rest >= 0) {
+                    data.put(key, rest);
+                    order[1] = 0;
+                } else {
+                    data.put(key, 0l);
+                    order[1] = (int)-rest;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
     public int countRestrictedPaths(int n, int[][] es) {
         int[] dis = new int[n+1];
         int[][] edges = new int[n+1][n+1];

@@ -8,58 +8,9 @@ import java.util.*;
 
 public class TestMain {
     public static void main(String[] args) {
-        char[] data = {0x7, 0x4b, 0x37, 0x3, 0x38, 0x16, 0, 0, 0x34, 0xff, 0x69, 0x22, 0, 0x44, 0, 0x15, 0, 0x3f, 0x1,
-                0x50, 0, 0xa8, 0x23, 0x1, 0x1, 0x1, 0, 0, 0, 0x1,
-                0, 0x1, 0x1, 0, 0, 0x1, 0, 0x1, 0, 0x1,
-                0, 0x1, 0, 0, 0, 0, 0, 0, 0x1, 0,
-                0x1, 0x1, 0x1, 0x1, 0x1,
-                0x1, 0x11, 0x11, 0x11, 0x11,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0};
-
-        String right = String.valueOf(data);
-//        Solution solution = new Solution();
-//        System.out.println(solution.countRestrictedPaths(6, new int[][]
-//        { {6,2,9},{2,1,7},{6,5,10},{4,3,1},{3,1,8},{4,6,4},{5,1,7},{1,4,7},{4,5,3},{3,6,6},{5,3,9},
-//        {1,6,6},{3,2,2},{5,2,8}}));
-//        System.out.println(solution.countRestrictedPaths(7, new int[][]
-//                {{1,3,1},{4,1,2},{7,3,4},{2,5,3},{5,6,1},{6,7,2},{7,5,3},{2,6,4}}));
-//        byte[] datas = HexEncoding.decode(dataText.toCharArray());
-//        String dataText = "033716000034ff692200"+
-//                "440015003f015000a823"+
-//                "01010100000001000101"+
-//                "00000100010001000100"+
-//                "000000000001000101010101"+
-//                "01111111110000000000"+
-//                "000000000000000000000000";
-//        dataText = "074b37033816000034ff692200440015003f015000a823010101000000010001010000010001000100010000000000000100010101010101111111110000000000000000000000000000000000";
-//        try {
-//            byte[] datas = decode(dataText.toCharArray());
-//            char[] s = encode(datas);
-//            String ss = String.valueOf(s);
-//            System.out.println( ss);
-//            System.out.println(dataText);
-//            System.out.println(  "sendMsg: "+ ss.equalsIgnoreCase(dataText));
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        System.out.println("right chars:" + Arrays.toString(data));
-        System.out.println("rigth string:" + right);
-        String s= "074b37033816000034ff692200440015003f015000a82301010100" +
-                "00000100010100000100010001000100000000000001000101010101011111" +
-                "11110000000000000000000000000000000000";
-        byte[] bs = decode(s.toCharArray());
-        char[] af = getChars(bs);
-        System.out.println("right chars:"+Arrays.toString(af));
-
-
-        System.out.println(right.equalsIgnoreCase(String.valueOf(af)));
-
-        System.out.println(right.length());
-//        for(int i=0; i<right.length() && i< af.length; ) {
-//
-//        }
+        Solution solution = new Solution();
+        System.out.println(solution.getNumberOfBacklogOrders(new int[][]{{27,30,0},{10,10,1},{28,17,1},{19,28,0},{16,8,1},{14,22,0},
+        {12,18,1},{3,15,0},{25,6,1}}));
     }
 
     public static byte[] decode(char[] encoded) throws IllegalArgumentException {
